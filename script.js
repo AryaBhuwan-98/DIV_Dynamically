@@ -1,21 +1,36 @@
-function createDivs() {
-  const numDivs = document.getElementById("numDivs").value;
-  const height = document.getElementById("height").value;
-  const width = document.getElementById("width").value;
-  const positionLeft = document.getElementById("positionL").value;
-  const positionTop = document.getElementById("positionT").value;
-  const divContainer = document.getElementById("divContainer");
+function showAdditionalInputs() {
+  const numDivs = parseInt(document.getElementById('numDivs').value);
 
-  divContainer.innerHTML = "";
-
-  for (let i = 0; i < numDivs; i++) {
-    const newDiv = document.createElement("div");
-    newDiv.className = "box";
-    newDiv.style.height = `${height}px`;
-    newDiv.style.width = `${width}px`;
-    newDiv.style.position = "relative";
-    newDiv.style.left = `${positionLeft}px`;
-    newDiv.style.top = `${positionTop}px`;
-    divContainer.appendChild(newDiv);
+  if (numDivs > 0) {
+      document.getElementById('additionalInputs').style.display = 'block';
   }
+}
+
+function createDivs() {
+  const numDivs = parseInt(document.getElementById('numDivs').value);
+  const height = parseInt(document.getElementById('height').value);
+  const width = parseInt(document.getElementById('width').value);
+  const paddingTop = parseInt(document.getElementById('paddingTop').value);
+  const paddingLeft = parseInt(document.getElementById('paddingLeft').value);
+
+  const divContainer = document.getElementById('divContainer');
+  const loading = document.getElementById('loading');
+
+  divContainer.innerHTML = '';
+  loading.style.display = 'block';
+
+  setTimeout(() => {
+      loading.style.display = 'none';
+      for (let i = 0; i < numDivs; i++) {
+          const newDiv = document.createElement('div');
+          newDiv.style.height = height + 'px';
+          newDiv.style.width = width + 'px';
+          newDiv.style.paddingTop = paddingTop + 'px';
+          newDiv.style.paddingLeft = paddingLeft + 'px';
+          newDiv.className = 'box';
+          newDiv.textContent = `Div ${i + 1}`;
+
+          divContainer.appendChild(newDiv);
+      }
+  }, 2000); // 2 seconds delay
 }
